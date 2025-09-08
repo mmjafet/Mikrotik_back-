@@ -10,7 +10,8 @@ logging.basicConfig(level=logging.DEBUG)
 logger = logging.getLogger(__name__)
 
 app = Flask(__name__)
-CORS(app)  # Habilita CORS para todas las rutas
+# More specific CORS configuration
+CORS(app, resources={r"/*": {"origins": "*"}}, supports_credentials=True)
 
 # Configuración
 MIKROTIK_HOST = 'http://192.168.88.1'  # Para API REST
@@ -340,4 +341,4 @@ def login():
 
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(host='0.0.0.0', port=5000, debug=True)
